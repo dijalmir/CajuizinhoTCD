@@ -178,9 +178,9 @@
                           <Component id="lblNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtCpf" min="-2" max="-2" attributes="0"/>
-                          <Component id="dteNascimento" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="dteNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="26" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -222,10 +222,7 @@
                 <Property name="text" type="java.lang.String" value="Limpar"/>
               </Properties>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="dteNascimento">
-              <Properties>
-                <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
-              </Properties>
+            <Component class="com.github.lgooddatepicker.components.DatePicker" name="dteNascimento">
             </Component>
           </SubComponents>
         </Container>

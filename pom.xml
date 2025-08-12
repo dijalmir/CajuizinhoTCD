@@ -4,9 +4,25 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>br.edu.ifnmg.poo</groupId>
-    <artifactId>trabalhofinalpoo-refactored</artifactId>
+    <artifactId>trabalhofinalpoo</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
+
+    <organization>
+        <name>IFNMG - Campus Montes Claros</name>
+        <url>http://www.ifnmg.edu.br</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>Deej</id>
+            <name>Dijalmir Barbosa de Oliveira Junior</name>
+            <email>dbdoj@aluno.ifnmg.edu.br</email>
+            <roles>
+                <role>Desenvolvedor</role>
+            </roles>
+        </developer>
+    </developers>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,17 +31,13 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.formdev</groupId>
-            <artifactId>flatlaf</artifactId>
-            <version>3.4.1</version>
-        </dependency>
 
         <dependency>
-            <groupId>com.toedter</groupId>
-            <artifactId>jcalendar</artifactId>
-            <version>1.4</version>
+            <groupId>com.github.lgooddatepicker</groupId>
+            <artifactId>LGoodDatePicker</artifactId>
+            <version>11.2.1</version>
         </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>

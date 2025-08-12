@@ -6,6 +6,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Representa a entidade Matrícula, que vincula um Discente a uma Turma.
+ *
+ * @author  Dijalmir Barbosa de Oliveira Junior
+ * @version 0.1
+ * @since 0.1, 11/08/2025
+ */
+
 @Entity
 @Table(name = "matricula")
 public class Matricula extends ProjectEntity {

@@ -12,6 +12,14 @@ import javax.swing.table.DefaultTableModel;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Tela de interface gráfica para o gerenciamento (CRUD) de Matrículas.
+ *
+ * @author  Dijalmir Barbosa de Oliveira Junior
+ * @version 0.1
+ * @since 0.1, 11/08/2025
+ */
+
 public class MatriculaTela extends javax.swing.JDialog {
 
     private final MatriculaRepository matriculaRepository;

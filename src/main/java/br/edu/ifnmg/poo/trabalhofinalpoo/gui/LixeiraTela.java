@@ -8,17 +8,19 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Frame;
 import java.util.List;
 
+/**
+ * Tela genérica para gerenciamento da lixeira de um repositório específico.
+ *
+ * @author  Dijalmir Barbosa de Oliveira Junior
+ * @version 0.1
+ * @since 0.1, 11/08/2025
+ */
+
 public class LixeiraTela extends javax.swing.JDialog {
 
     private final IRepository repository;
     private Long idSelecionado;
 
-    /**
-     * Creates new form LixeiraTela
-     * @param parent O frame pai.
-     * @param modal Se a janela é modal.
-     * @param repository O repositório da entidade a ser gerenciada.
-     */
     public LixeiraTela(Frame parent, boolean modal, IRepository repository) {
         super(parent, modal);
         this.repository = repository;

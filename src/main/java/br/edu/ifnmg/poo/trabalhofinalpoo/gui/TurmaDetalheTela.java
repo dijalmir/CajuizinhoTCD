@@ -10,6 +10,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Tela para exibir e gerenciar os detalhes de uma Turma, como aulas e alunos.
+ *
+ * @author  Dijalmir Barbosa de Oliveira Junior
+ * @version 0.1
+ * @since 0.1, 11/08/2025
+ */
+
 public class TurmaDetalheTela extends javax.swing.JDialog {
 
     private Turma turma;
@@ -90,7 +98,6 @@ public class TurmaDetalheTela extends javax.swing.JDialog {
             }
         });
 
-        // Ação para o painel de Alunos
         btnGerenciarAvaliacoes.addActionListener(e -> gerenciarAvaliacoes());
     }
 
@@ -117,7 +124,7 @@ public class TurmaDetalheTela extends javax.swing.JDialog {
 
         if (editor.isConfirmado()) {
             aulaRepository.saveOrUpdate(novaAula);
-            carregarAulas(); // Atualiza a tabela
+            carregarAulas();
         }
     }
 

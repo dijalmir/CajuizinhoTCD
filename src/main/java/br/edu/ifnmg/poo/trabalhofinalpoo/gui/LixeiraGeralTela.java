@@ -17,6 +17,14 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Tela que exibe todos os itens movidos para a lixeira de todos os repositórios.
+ *
+ * @author  Dijalmir Barbosa de Oliveira Junior
+ * @version 0.1
+ * @since 0.1, 11/08/2025
+ */
+
 public class LixeiraGeralTela extends javax.swing.JDialog {
 
     private final List<IRepository> repositorios;

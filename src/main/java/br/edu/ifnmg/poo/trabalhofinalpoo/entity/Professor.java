@@ -7,6 +7,14 @@ import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Representa a entidade Professor no sistema.
+ *
+ * @author  Dijalmir Barbosa de Oliveira Junior
+ * @version 0.1
+ * @since 0.1, 11/08/2025
+ */
+
 @Entity
 @Table(name = "professor")
 public class Professor extends ProjectEntity {

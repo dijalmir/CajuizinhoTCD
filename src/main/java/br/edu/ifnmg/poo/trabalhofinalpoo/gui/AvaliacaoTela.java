@@ -10,6 +10,14 @@ import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Tela para gerenciar as avaliações de um aluno em uma determinada matrícula.
+ *
+ * @author  Dijalmir Barbosa de Oliveira Junior
+ * @version 0.1
+ * @since 0.1, 11/08/2025
+ */
+
 public class AvaliacaoTela extends javax.swing.JDialog {
 
     private Matricula matricula;

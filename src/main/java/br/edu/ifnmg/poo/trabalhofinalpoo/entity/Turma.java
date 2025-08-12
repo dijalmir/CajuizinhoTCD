@@ -5,6 +5,14 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Representa a entidade Turma, associando uma Disciplina a um Professor em um período.
+ *
+ * @author  Dijalmir Barbosa de Oliveira Junior
+ * @version 0.1
+ * @since 0.1, 11/08/2025
+ */
+
 @Entity
 @Table(name = "turma")
 public class Turma extends ProjectEntity {

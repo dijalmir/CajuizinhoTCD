@@ -4,6 +4,14 @@ import br.edu.ifnmg.poo.trabalhofinalpoo.repository.ProjectEntity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * Representa a entidade Aula, contendo o conteúdo ministrado e a data/hora.
+ *
+ * @author  Dijalmir Barbosa de Oliveira Junior
+ * @version 0.1
+ * @since 0.1, 11/08/2025
+ */
+
 @Entity
 @Table(name = "aula")
 public class Aula extends ProjectEntity {

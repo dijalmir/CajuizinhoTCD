@@ -1,16 +1,16 @@
 package br.edu.ifnmg.poo.trabalhofinalpoo.gui;
 
-import com.formdev.flatlaf.FlatDarkLaf;
-import javax.swing.UnsupportedLookAndFeelException;
+/**
+ * Classe principal que representa a janela inicial do sistema acadêmico.
+ *
+ * @author  Dijalmir Barbosa de Oliveira Junior
+ * @version 0.1
+ * @since 0.1, 11/08/2025
+ */
 
 public class TelaPrincipal extends javax.swing.JFrame {
 
     public TelaPrincipal() {
-        try {
-            javax.swing.UIManager.setLookAndFeel(new FlatDarkLaf());
-        } catch (UnsupportedLookAndFeelException e) {
-            System.err.println("Falha ao inicializar o tema escuro.");
-        }
 
         initComponents();
         setLocationRelativeTo(null);
@@ -47,12 +47,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         itmSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sistema de Controle Acadêmico");
+        setTitle("Sistema de Controle Acadêmico - Cajuizinho");
 
         lblSubtitulo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSubtitulo.setForeground(new java.awt.Color(153, 153, 153));
         lblSubtitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSubtitulo.setText("Selecione uma opção no menu \"Cadastros\" para começar.");
+        lblSubtitulo.setText("Selecione uma opção no menu Cadastros para começar.");
 
         btnSair.setText("Sair");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -63,7 +63,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Sistema de Controle Acadêmico");
+        lblTitulo.setText("Cajuizinho");
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
         pnlPrincipal.setLayout(pnlPrincipalLayout);

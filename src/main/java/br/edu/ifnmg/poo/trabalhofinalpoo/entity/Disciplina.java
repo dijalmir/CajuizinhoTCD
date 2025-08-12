@@ -5,6 +5,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+/**
+ * Representa a entidade Disciplina, com nome e ementa.
+ *
+ * @author  Dijalmir Barbosa de Oliveira Junior
+ * @version 0.1
+ * @since 0.1, 11/08/2025
+ */
+
 @Entity
 @Table(name = "disciplina")
 public class Disciplina extends ProjectEntity {

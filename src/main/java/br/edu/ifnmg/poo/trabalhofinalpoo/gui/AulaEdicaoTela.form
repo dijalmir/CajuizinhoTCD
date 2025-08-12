@@ -102,8 +102,8 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblDataHora" min="-2" max="-2" attributes="0"/>
-                                  <Component id="dteDataHora" min="-2" pref="200" max="-2" attributes="0"/>
                                   <Component id="lblConteudo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="dteDataHora" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -139,11 +139,6 @@
                 <Property name="text" type="java.lang.String" value="Data e Hora"/>
               </Properties>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="dteDataHora">
-              <Properties>
-                <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy HH:mm"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="lblConteudo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Conte&#xfa;do Ministrado"/>
@@ -175,6 +170,8 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salvar"/>
               </Properties>
+            </Component>
+            <Component class="com.github.lgooddatepicker.components.DateTimePicker" name="dteDataHora">
             </Component>
           </SubComponents>
         </Container>

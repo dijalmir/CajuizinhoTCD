@@ -11,6 +11,14 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
+/**
+ * Tela de interface gráfica para o gerenciamento (CRUD) de Turmas.
+ *
+ * @author  Dijalmir Barbosa de Oliveira Junior
+ * @version 0.1
+ * @since 0.1, 11/08/2025
+ */
+
 public class TurmaTela extends javax.swing.JDialog {
 
     private final TurmaRepository turmaRepository;

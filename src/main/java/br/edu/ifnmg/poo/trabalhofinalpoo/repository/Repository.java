@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2025 Luis Guisso &lt;luis dot guisso at ifnmg dot edu dot br&gt;
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package br.edu.ifnmg.poo.trabalhofinalpoo.repository;
 
 import jakarta.persistence.EntityManager;
@@ -23,14 +7,6 @@ import jakarta.persistence.TypedQuery;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-/**
- * Generic repository
- *
- * @author Dijalmir Junior
- * @version 0.1
- * @param <T> Type of objects
- * @since 0.1, Jul 7, 2025
- */
 public abstract class Repository<T extends ProjectEntity>
         implements IRepository<T> {
 
@@ -42,15 +18,11 @@ public abstract class Repository<T extends ProjectEntity>
                 .getGenericSuperclass())
                 .getActualTypeArguments()[0];
     }
-    
+
     @Override
     public Long saveOrUpdate(T e) {
-
-        // try-with resources
         try (EntityManager em = DataSourceFactory.getEntityManager()) {
-
             EntityTransaction tx = em.getTransaction();
-
             try {
                 tx.begin();
                 if (e.getId() == null || e.getId() == 0) {
@@ -62,17 +34,17 @@ public abstract class Repository<T extends ProjectEntity>
             } catch (Exception ex) {
                 if (tx != null && tx.isActive()) {
                     tx.rollback();
-                    throw ex;
                 }
+                throw ex;
             }
         }
-
         return e.getId();
     }
 
     private String getAliasFromJpql(String jpql) {
         return jpql.split(" ")[1];
     }
+
     @Override
     public List<T> findAll() {
         try (EntityManager em = DataSourceFactory.getEntityManager()) {
@@ -107,7 +79,6 @@ public abstract class Repository<T extends ProjectEntity>
         return setExcluidoFlag(id, true);
     }
 
-    //<editor-fold defaultstate="collapsed" desc="Lixeira (Trash) Implementation">
     @Override
     public List<T> findAllInTrash() {
         try (EntityManager em = DataSourceFactory.getEntityManager()) {
@@ -152,11 +123,14 @@ public abstract class Repository<T extends ProjectEntity>
             EntityTransaction tx = em.getTransaction();
             try {
                 tx.begin();
-                Query query = em.createQuery(getJpqlDeleteById());
-                query.setParameter("id", id);
-                int deletions = query.executeUpdate();
-                tx.commit();
-                return deletions > 0;
+                T entity = em.find(persistentClass, id);
+                if (entity != null) {
+                    em.remove(entity);
+                    tx.commit();
+                    return true;
+                }
+                tx.rollback();
+                return false;
             } catch (Exception ex) {
                 if (tx != null && tx.isActive()) tx.rollback();
                 throw ex;
@@ -167,19 +141,25 @@ public abstract class Repository<T extends ProjectEntity>
     @Override
     public int emptyTrash() {
         try (EntityManager em = DataSourceFactory.getEntityManager()) {
+            List<T> itemsInTrash = findAllInTrash();
+            int count = 0;
             EntityTransaction tx = em.getTransaction();
             try {
                 tx.begin();
-                String jpql = "DELETE FROM " + persistentClass.getSimpleName() + " e WHERE e.excluido = true";
-                Query query = em.createQuery(jpql);
-                int deletions = query.executeUpdate();
+                for (T item : itemsInTrash) {
+                    em.remove(em.contains(item) ? item : em.merge(item));
+                    count++;
+                }
                 tx.commit();
-                return deletions;
+                return count;
             } catch (Exception ex) {
                 if (tx != null && tx.isActive()) tx.rollback();
                 throw ex;
             }
         }
     }
-    //</editor-fold>
+
+    public abstract String getJpqlFindAll();
+    public abstract String getJpqlFindById();
+    public abstract String getJpqlDeleteById();
 }

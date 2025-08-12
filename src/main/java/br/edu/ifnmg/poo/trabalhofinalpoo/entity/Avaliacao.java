@@ -3,6 +3,14 @@ package br.edu.ifnmg.poo.trabalhofinalpoo.entity;
 import jakarta.persistence.*;
 import br.edu.ifnmg.poo.trabalhofinalpoo.repository.ProjectEntity;
 
+/**
+ * Representa a entidade Avaliacao, associada a uma matrícula específica.
+ *
+ * @author  Dijalmir Barbosa de Oliveira Junior
+ * @version 0.1
+ * @since 0.1, 11/08/2025
+ */
+
 @Entity
 @Table(name = "avaliacao")
 public class Avaliacao extends ProjectEntity {

@@ -23,7 +23,7 @@ import jakarta.persistence.Persistence;
 /**
  * Data source factory for MySQL RDBMS
  *
- * DDL: CREATE DATABASE crudtst DEFAULT CHARACTER SET utf8mb4 COLLATE
+ * DDL: CREATE DATABASE cajuizinho DEFAULT CHARACTER SET utf8mb4 COLLATE
  * utf8mb4_unicode_ci;
  *
  * @author Luis Guisso &lt;luis dot guisso at ifnmg dot edu dot br&gt;
@@ -33,7 +33,7 @@ import jakarta.persistence.Persistence;
 public class DataSourceFactory {
 
     private static EntityManagerFactory emf;
-    private static final String PU_NAME = "crudPU";
+    private static final String PU_NAME = "cajuizinhoPU";
 
     // EntityManagerFactory can have a persistent lifecycle
     private static EntityManagerFactory getEMFactory() {
