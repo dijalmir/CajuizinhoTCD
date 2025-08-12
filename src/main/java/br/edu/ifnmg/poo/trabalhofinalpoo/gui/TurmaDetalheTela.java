@@ -1,10 +1,7 @@
 package br.edu.ifnmg.poo.trabalhofinalpoo.gui;
 
-import br.edu.ifnmg.poo.trabalhofinalpoo.entity.Aula;
-import br.edu.ifnmg.poo.trabalhofinalpoo.entity.Matricula;
-import br.edu.ifnmg.poo.trabalhofinalpoo.entity.Turma;
-import br.edu.ifnmg.poo.trabalhofinalpoo.repository.AulaRepository;
-import br.edu.ifnmg.poo.trabalhofinalpoo.repository.TurmaRepository;
+import br.edu.ifnmg.poo.trabalhofinalpoo.entity.*;
+import br.edu.ifnmg.poo.trabalhofinalpoo.repository.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -15,9 +12,10 @@ import java.util.List;
 
 public class TurmaDetalheTela extends javax.swing.JDialog {
 
-    private final Turma turma;
+    private Turma turma;
     private final TurmaRepository turmaRepository;
     private final AulaRepository aulaRepository;
+    private Aula aulaSelecionada;
 
     public TurmaDetalheTela(Frame parent, boolean modal, Turma turma) {
         super(parent, modal);
@@ -51,30 +49,24 @@ public class TurmaDetalheTela extends javax.swing.JDialog {
 
         for (Matricula m : matriculas) {
             if (!m.isExcluido()) {
-                Object[] row = {
-                        m.getId(),
-                        m.getDiscente().getNome()
-                };
+                Object[] row = { m.getId(), m.getDiscente().getNome() };
                 model.addRow(row);
             }
         }
     }
 
     private void carregarAulas() {
+        this.turma = turmaRepository.findById(turma.getId());
+
         DefaultTableModel model = (DefaultTableModel) tblAulas.getModel();
         model.setRowCount(0);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-
         List<Aula> aulas = new ArrayList<>(turma.getAulas());
 
         for (Aula a : aulas) {
             if (!a.isExcluido()) {
-                Object[] row = {
-                        a.getId(),
-                        a.getDataHora().format(formatter),
-                        a.getConteudo()
-                };
+                Object[] row = { a.getId(), a.getDataHora().format(formatter), a.getConteudo() };
                 model.addRow(row);
             }
         }
@@ -82,6 +74,81 @@ public class TurmaDetalheTela extends javax.swing.JDialog {
 
     private void adicionarListeners(){
         btnFechar.addActionListener(e -> this.dispose());
+
+        // Ações para o painel de Aulas
+        btnNovaAula.addActionListener(e -> criarNovaAula());
+        btnEditarAula.addActionListener(e -> editarAula());
+        btnExcluirAula.addActionListener(e -> excluirAula());
+
+        tblAulas.getSelectionModel().addListSelectionListener(event -> {
+            if (!event.getValueIsAdjusting() && tblAulas.getSelectedRow() != -1) {
+                int selectedRow = tblAulas.getSelectedRow();
+                Long id = (Long) tblAulas.getValueAt(selectedRow, 0);
+                aulaSelecionada = aulaRepository.findById(id);
+            } else {
+                aulaSelecionada = null;
+            }
+        });
+
+        // Ação para o painel de Alunos
+        btnGerenciarAvaliacoes.addActionListener(e -> gerenciarAvaliacoes());
+    }
+
+    private void gerenciarAvaliacoes() {
+        int selectedRow = tblAlunosMatriculados.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um aluno na lista para gerenciar as avaliações.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Long matriculaId = (Long) tblAlunosMatriculados.getValueAt(selectedRow, 0);
+        Matricula matriculaSelecionada = new MatriculaRepository().findById(matriculaId);
+
+        if (matriculaSelecionada != null) {
+            AvaliacaoTela avaliacaoTela = new AvaliacaoTela(this, true, matriculaSelecionada);
+            avaliacaoTela.setVisible(true);
+        }
+    }
+
+    private void criarNovaAula() {
+        Aula novaAula = new Aula();
+        AulaEdicaoTela editor = new AulaEdicaoTela(this, true, novaAula, this.turma);
+        editor.setVisible(true);
+
+        if (editor.isConfirmado()) {
+            aulaRepository.saveOrUpdate(novaAula);
+            carregarAulas(); // Atualiza a tabela
+        }
+    }
+
+    private void editarAula() {
+        if (aulaSelecionada == null) {
+            JOptionPane.showMessageDialog(this, "Selecione uma aula para editar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        AulaEdicaoTela editor = new AulaEdicaoTela(this, true, aulaSelecionada, this.turma);
+        editor.setVisible(true);
+
+        if (editor.isConfirmado()) {
+            aulaRepository.saveOrUpdate(aulaSelecionada);
+            carregarAulas();
+        }
+    }
+
+    private void excluirAula() {
+        if (aulaSelecionada == null) {
+            JOptionPane.showMessageDialog(this, "Selecione uma aula para excluir.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int resposta = JOptionPane.showConfirmDialog(this,
+                "Deseja mover esta aula para a lixeira?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION);
+
+        if (resposta == JOptionPane.YES_OPTION) {
+            aulaRepository.deleteById(aulaSelecionada.getId());
+            carregarAulas();
+        }
     }
 
     /**
