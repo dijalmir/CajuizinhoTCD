@@ -1,4 +1,4 @@
-# Sistema de Gestão Académica - Cajuizinho
+# Sistema de Gestão Academica - Cajuizinho
 
 
 Este projeto é o trabalho final da disciplina de Programação Orientada a Objetos, do curso de Ciência da Computação do IFNMG - Campus Montes Claros.
